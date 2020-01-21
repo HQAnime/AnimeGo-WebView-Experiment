@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-paper": "^3.4.1",
     "react-native-webview": "^8.0.4"
   },
   "devDependencies": {
