@@ -14,6 +14,6 @@ In this way, we, users, know which anime it is.
 I built an APK just for fun. If you want to use it, please feel free to do so. 
 However, there won't be any updates to this repo anymore as long as it is working. 
 
-[Release Build](https://github.com/HenryQuan/AnimeGo-WebView-Experiment/releases)
+[Release Build](https://github.com/HenryQuan/AnimeGo-WebView-Experiment/releases/tag/0.0.1)
 
 Maybe a Windows version will be added but who knows?
