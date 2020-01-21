@@ -10,10 +10,10 @@ This will be added to the new version of `AnimeGo` and maybe it is also time to 
 The website is still great compared to [AnimeOne](https://github.com/HenryQuan/AnimeOne) expect for ads/popups because it shows a cover of the anime. 
 In this way, we, users, know which anime it is.
 
-## APK
+## Android
 I built an APK just for fun. If you want to use it, please feel free to do so. 
 However, there won't be any updates to this repo anymore as long as it is working. 
 
-[Release Build](https://github.com/HenryQuan/AnimeGo-WebView-Experiment/releases/tag/0.0.1)
+[Release Build](https://github.com/HenryQuan/AnimeGo-WebView-Experiment/releases/tag/0.0.2)
 
-Maybe a Windows version will be added but who knows?
+~~Maybe a Windows version will be added but who knows?~~
