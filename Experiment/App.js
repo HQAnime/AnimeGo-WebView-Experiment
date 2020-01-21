@@ -6,37 +6,47 @@
  * @flow
  */
 
-import React from 'react';
-import { View, Text, ToastAndroid } from 'react-native';
+import React, { Component } from 'react';
+import { View, ToastAndroid, StatusBar } from 'react-native';
+import { Appbar, Colors } from 'react-native-paper';
 import WebView from 'react-native-webview';
 
-const App = () => {
-  let link = 'https://www2.gogoanimes.ai/heya-camp-episode-3';
-  let domain = getFullDomainFromLink(link);
-  console.log(domain);
-
-  return (
-    <View style={{flex: 1}}>
-      <WebView source={{ uri: link }}
-        allowsFullscreenVideo
-        onShouldStartLoadWithRequest={request => {
-          // Only allow navigating within this website
-          console.log(request);
-
-          const { url, title } = request;
-          let shouldLoad = url.includes(domain) || title === '';
-          if (!shouldLoad) {
-            ToastAndroid.showWithGravity('Popup has been blocked', ToastAndroid.SHORT, ToastAndroid.TOP);
-          }
-          
-          console.log(shouldLoad);
-          return shouldLoad;
-        }} />
-      <View>
-        
+class App extends Component {
+  render() {
+    let home = 'https://www2.gogoanimes.ai/';
+    let domain = getFullDomainFromLink(home);
+    console.log(domain);
+    
+    return (
+      <View style={{flex: 1}}>
+        <StatusBar backgroundColor={Colors.black}/>
+        <WebView source={{ uri: home }}
+          allowsFullscreenVideo ref={ref => (this.webview = ref)}
+          onShouldStartLoadWithRequest={request => {
+            // Only allow navigating within this website
+            console.log(request);
+  
+            const { url, title } = request;
+            let shouldLoad = url.includes(domain) || title === '';
+            if (!shouldLoad) {
+              ToastAndroid.showWithGravity('Popup has been blocked', ToastAndroid.SHORT, ToastAndroid.TOP);
+            }
+            
+            console.log(shouldLoad);
+            return shouldLoad;
+          }} />
+        <Appbar style={{backgroundColor: Colors.amber400, justifyContent: 'space-around'}}>
+          <Appbar.Action icon='arrow-left' onPress={() => this.webview.goBack()} />
+          <Appbar.Action icon='arrow-right' onPress={() => this.webview.goForward()} />
+          <Appbar.Action icon='refresh' onPress={() => this.webview.reload()} />
+          <Appbar.Action icon='home' onPress={() => {
+            const redirectTo = 'window.location = "' + home + '"';
+            this.webview.injectJavaScript(redirectTo);
+          }} />
+        </Appbar>
       </View>
-    </View>
-  );
+    );
+  }
 };
 
 /**

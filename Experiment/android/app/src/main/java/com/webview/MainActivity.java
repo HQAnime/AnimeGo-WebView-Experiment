@@ -1,4 +1,4 @@
-package com.webview;
+package org.github.henryquan.webview_experiment;
 
 import com.facebook.react.ReactActivity;
 
