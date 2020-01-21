@@ -7,11 +7,20 @@
  */
 
 import React, { Component } from 'react';
+import KeepAwake from 'react-native-keep-awake';
 import { View, ToastAndroid, StatusBar } from 'react-native';
 import { Appbar, Colors } from 'react-native-paper';
 import WebView from 'react-native-webview';
+import Orientation from 'react-native-orientation';
 
 class App extends Component {
+  vertical = false;
+
+  constructor() {
+    super();
+    KeepAwake.activate();
+  }
+
   render() {
     let home = 'https://www2.gogoanimes.ai/';
     let domain = getFullDomainFromLink(home);
@@ -38,10 +47,19 @@ class App extends Component {
         <Appbar style={{backgroundColor: Colors.amber400, justifyContent: 'space-around'}}>
           <Appbar.Action icon='arrow-left' onPress={() => this.webview.goBack()} />
           <Appbar.Action icon='arrow-right' onPress={() => this.webview.goForward()} />
-          <Appbar.Action icon='refresh' onPress={() => this.webview.reload()} />
           <Appbar.Action icon='home' onPress={() => {
             const redirectTo = 'window.location = "' + home + '"';
             this.webview.injectJavaScript(redirectTo);
+          }} />
+          <Appbar.Action icon='refresh' onPress={() => this.webview.reload()} />
+          <Appbar.Action icon='screen-rotation' onPress={() => {
+            if (this.vertical) {
+              Orientation.lockToPortrait();
+            } else {
+              Orientation.lockToLandscape();
+            }
+
+            this.vertical = !this.vertical;
           }} />
         </Appbar>
       </View>
