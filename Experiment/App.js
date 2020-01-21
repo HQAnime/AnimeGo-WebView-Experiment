@@ -11,8 +11,8 @@ import { View, Text, ToastAndroid } from 'react-native';
 import WebView from 'react-native-webview';
 
 const App = () => {
-  let link = 'https://www.fembed.com/v/j-5gdcdq-nwldn2';
-  let domain = getDomainNameFromLink(link);
+  let link = 'https://www2.gogoanimes.ai/heya-camp-episode-3';
+  let domain = getFullDomainFromLink(link);
   console.log(domain);
 
   return (
@@ -26,11 +26,15 @@ const App = () => {
           const { url, title } = request;
           let shouldLoad = url.includes(domain) || title === '';
           if (!shouldLoad) {
-            ToastAndroid.showWithGravity('Popup has been blocked', 0.5, ToastAndroid.TOP);
+            ToastAndroid.showWithGravity('Popup has been blocked', ToastAndroid.SHORT, ToastAndroid.TOP);
           }
-
+          
+          console.log(shouldLoad);
           return shouldLoad;
         }} />
+      <View>
+        
+      </View>
     </View>
   );
 };
@@ -50,5 +54,15 @@ function getDomainNameFromLink(link) {
   return domain.split('www.').pop();
 }
 
+
+/**
+ * Like `getDomainNameFromLink` but a longer version
+ * @param {String} link 
+ */
+function getFullDomainFromLink(link) {
+  let temp = link.split('//');
+  let domain = temp[1].split('/').shift();
+  return `${temp[0]}//${domain}`;
+}
 
 export default App;
