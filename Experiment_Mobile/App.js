@@ -28,21 +28,16 @@ class App extends Component {
 
     // Remove ads
     const removeAdsScript = `
-      let imgs = document.getElementsByTagName('img');
-      for (let i of imgs) {
-        if (i.border) i.remove();
-      }
-
-      let divs = document.getElementsByClassName('image-with-text');
-      for (let d of divs) {
-        divs.removeChild(d);
-      }
+      $('.image-with-text').remove();
+      $('.ad-bebi').remove();
+      $('.anime_video_body_comment_center').remove();
     `;
+    const injectJS = () => this.webview.injectJavaScript(removeAdsScript);
     
     return (
       <View style={{flex: 1}}>
         <StatusBar backgroundColor={Colors.black}/>
-        <WebView source={{ uri: home }} injectedJavaScript={removeAdsScript}
+        <WebView source={{ uri: home }}
           allowsFullscreenVideo ref={ref => (this.webview = ref)}
           onShouldStartLoadWithRequest={request => {
             // Only allow navigating within this website
@@ -56,7 +51,7 @@ class App extends Component {
             
             console.log(shouldLoad);
             return shouldLoad;
-          }} />
+          }} onLoad={injectJS} onLoadStart={injectJS} onLoadEnd={injectJS}/>
         <Appbar style={{backgroundColor: Colors.amber400, justifyContent: 'space-around'}}>
           <Appbar.Action icon='arrow-left' onPress={() => this.webview.goBack()} />
           <Appbar.Action icon='arrow-right' onPress={() => this.webview.goForward()} />
@@ -79,6 +74,7 @@ class App extends Component {
     );
   }
 };
+
 
 /**
  * Consider these cases
