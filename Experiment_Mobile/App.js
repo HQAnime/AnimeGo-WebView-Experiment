@@ -25,11 +25,24 @@ class App extends Component {
     let home = 'https://www2.gogoanimes.ai/';
     let domain = getFullDomainFromLink(home);
     console.log(domain);
+
+    // Remove ads
+    const removeAdsScript = `
+      let imgs = document.getElementsByTagName('img');
+      for (let i of imgs) {
+        if (i.border) i.remove();
+      }
+
+      let divs = document.getElementsByClassName('image-with-text');
+      for (let d of divs) {
+        divs.removeChild(d);
+      }
+    `;
     
     return (
       <View style={{flex: 1}}>
         <StatusBar backgroundColor={Colors.black}/>
-        <WebView source={{ uri: home }}
+        <WebView source={{ uri: home }} injectedJavaScript={removeAdsScript}
           allowsFullscreenVideo ref={ref => (this.webview = ref)}
           onShouldStartLoadWithRequest={request => {
             // Only allow navigating within this website
