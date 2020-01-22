@@ -53,6 +53,7 @@ class App extends Component {
             return shouldLoad;
           }} onLoad={injectJS} onLoadStart={injectJS} onLoadEnd={injectJS}/>
         <Appbar style={{backgroundColor: Colors.amber400, justifyContent: 'space-around'}}>
+          <Appbar.Action icon='function-variant' onPress={injectJS} />
           <Appbar.Action icon='arrow-left' onPress={() => this.webview.goBack()} />
           <Appbar.Action icon='arrow-right' onPress={() => this.webview.goForward()} />
           <Appbar.Action icon='home' onPress={() => {
