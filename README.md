@@ -1,4 +1,6 @@
 # AnimeGo WebView Experiment
+**This has been used in [AnimeGo Re](https://github.com/HenryQuan/AnimeGo-Re)**
+
 I was thinking about how to block ads/popups for my app, [AnimeGo](https://github.com/HenryQuan/AnimeGo). 
 After some **duckduckgo**ing, I found out that [react-native-webview](https://github.com/react-native-community/react-native-webview) does support `originWhitelist` 
 but it wasn't great because it still opened in my browser. 
